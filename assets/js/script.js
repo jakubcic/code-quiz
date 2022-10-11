@@ -1,9 +1,9 @@
 // declare variables. need start button element, timer element,
 // main question section element, question list element
-var startBtn = document.querySelector("#startBtn");
-var timer = document.querySelector("#timer");
-var questionSection = document.querySelector("#questionSection");
-var questionList = document.querySelector("#questionList");
+var startBtnEl = document.querySelector("#startBtn");
+var timerEl = document.querySelector("#timer");
+var questionSectionEl = document.querySelector("#questionSection");
+var questionListEl = document.querySelector("#questionList");
 
 // questions array will contain an object for each question of the quiz
 // where the question, possible answers, and the true answer are held
@@ -35,21 +35,42 @@ var questions = [
   }
 ]
 
-// start a time interval when the startBtn is clicked
+// start a time interval when the startBtnEl is clicked
 // and display the quiz questions
-startBtn.addEventListener("click", function (){
+startBtnEl.addEventListener("click", function (){
   let timeInterval = 0;
   let timeLeft = 75;
   if (timeInterval === 0){
     timeInterval = setInterval(function (){
       timeLeft--;
-      timer.textContent = "Time: " + timeLeft;
+      timerEl.textContent = "Time: " + timeLeft;
 
       if (timeLeft === 0) {
         clearInterval(timeInterval);
-        timer.textContent = "You're out of time!";
+        timerEl.textContent = "You're out of time!";
       }
     }, 1000);
   }
   // call a function to display questions
+  displayQuestion(questionIndex)
 })
+
+// need to track which question we're on
+var questionIndex = 0;
+
+// need a function to display questions to user
+function displayQuestion(){
+  // clear the screen
+  questionSectionEl.innerHTML = "";
+  questionListEl.innerHTML = "";
+  startBtnEl.style.visibility = "hidden";
+
+  // loop through each question
+  for (let i = 0; i < questions.length; i++) {
+    let currentQuestion = questions[questionIndex].question
+    let currentOptions = questions[questionIndex].options
+    questionSectionEl.textContent = currentQuestion
+    
+  }
+
+}
