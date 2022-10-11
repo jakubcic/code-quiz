@@ -67,10 +67,21 @@ function displayQuestion(){
 
   // loop through each question
   for (let i = 0; i < questions.length; i++) {
-    let currentQuestion = questions[questionIndex].question
-    let currentOptions = questions[questionIndex].options
-    questionSectionEl.textContent = currentQuestion
-    
+    let currentQuestion = questions[questionIndex].question;
+    var currentOptions = questions[questionIndex].options;
+    questionSectionEl.textContent = currentQuestion;
   }
 
+  // loop through each option for the currentQuestion
+  // and display in a list
+  for (let j = 0; j < currentOptions.length; j++) {
+    let listItem = document.createElement("li");
+    listItem.textContent = currentOptions[j];
+    questionSectionEl.appendChild(questionListEl);
+    questionListEl.appendChild(listItem);
+    // add event listener to each option and call a function 
+    //to check the users choice versus
+    // the actual answer (questions[questionIndex].answer])
+    listItem.addEventListener("click", (checkAnswer));
+  }
 }
