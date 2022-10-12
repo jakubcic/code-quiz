@@ -58,7 +58,6 @@ ul > li:hover {
   color: var(--display-text)
 }
 
-
 .scoreContainer {
   display: flex;
   flex-direction: column;
