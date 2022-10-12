@@ -164,6 +164,7 @@ function quizComplete(){
 
   var submission = document.createElement("button");
   submission.setAttribute("type", "submit");
+  submission.setAttribute("class", "buttonStyles");
   submission.setAttribute("id", "submit");
   submission.textContent = "Submit";
   questionSectionEl.appendChild(submission);
