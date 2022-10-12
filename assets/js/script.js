@@ -5,6 +5,10 @@ var timerEl = document.querySelector("#timer");
 var questionSectionEl = document.querySelector("#questionSection");
 var questionListEl = document.querySelector("#questionList");
 
+var timeInterval = 0;
+var timeLeft = 75;
+var correctAnswersCount = 0
+
 // questions array will contain an object for each question of the quiz
 // where the question, possible answers, and the true answer are held
 var questions = [
@@ -38,8 +42,7 @@ var questions = [
 // start a time interval when the startBtnEl is clicked
 // and display the quiz questions
 startBtnEl.addEventListener("click", function (){
-  let timeInterval = 0;
-  let timeLeft = 75;
+
   if (timeInterval === 0){
     timeInterval = setInterval(function (){
       timeLeft--;
@@ -59,7 +62,7 @@ startBtnEl.addEventListener("click", function (){
 var questionIndex = 0;
 
 // need a function to display questions to user
-function displayQuestion(){
+function displayQuestion(questionIndex){
   // clear the screen
   questionSectionEl.innerHTML = "";
   questionListEl.innerHTML = "";
@@ -67,7 +70,7 @@ function displayQuestion(){
 
   // loop through each question
   for (let i = 0; i < questions.length; i++) {
-    let currentQuestion = questions[questionIndex].question;
+    var currentQuestion = questions[questionIndex].question;
     var currentOptions = questions[questionIndex].options;
     questionSectionEl.textContent = currentQuestion;
   }
@@ -75,7 +78,7 @@ function displayQuestion(){
   // loop through each option for the currentQuestion
   // and display in a list
   for (let j = 0; j < currentOptions.length; j++) {
-    let listItem = document.createElement("li");
+    var listItem = document.createElement("li");
     listItem.textContent = currentOptions[j];
     questionSectionEl.appendChild(questionListEl);
     questionListEl.appendChild(listItem);
@@ -85,3 +88,45 @@ function displayQuestion(){
     listItem.addEventListener("click", (checkAnswer));
   }
 }
+
+// track user score. Score will be equal to the timeLeft
+// minus a time penalty for incorrect answers
+//var score = timeLeft
+//var penalty = 10
+
+function checkAnswer(event){
+  var clickTarget = event.target;
+  var penalty = 10;
+  // check if we clicked on a list item
+  if (clickTarget.matches("li")) {
+    
+
+    var displayMessageEl = document.createElement("div");
+    displayMessageEl.setAttribute("id", "displayMessage");
+
+    // correct answer
+    var correctAnswer = questions[questionIndex].answer;
+
+    if (clickTarget.textContent == correctAnswer){
+      correctAnswersCount++;
+      console.log(correctAnswersCount);
+      displayMessageEl.textContent = "Correct!";
+    } else {
+      // incorrect answer 
+      timeLeft = timeLeft - penalty;
+      displayMessageEl.textContent = "Incorrect!";
+    }
+  }
+  // iterate the questionIndex
+  questionIndex++;
+
+  // if we reach the end of the questions (compare question index
+  // to the length of the questions array minus 1) then compelte the quiz
+  if (questionIndex == questions.length){
+    displayMessageEl.textContent = "You answered " + correctAnswersCount + "/" + questions.length + " questions correctly.";
+  } else {
+    displayQuestion(questionIndex);
+  }
+  questionSectionEl.appendChild(displayMessageEl)
+}
+
