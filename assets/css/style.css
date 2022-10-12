@@ -1,5 +1,12 @@
+:root {
+  --light-purple: rgb(77, 0, 219);
+  --dark-purple: rgb(41, 1, 114);
+  --display-text: rgb(92, 92, 92);
+  --highlight: rgb(160, 150, 218);
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
 }
 
 header > * {
@@ -11,6 +18,10 @@ header > * {
   float: right;
 }
 
+a {
+  text-decoration: none;
+  color: var(--light-purple)
+}
 .container {
   display: flex;
   padding: 5em 10em 5em 10em;
@@ -18,6 +29,7 @@ header > * {
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
+  border-radius: 1em;
   background: #efefef;
 }
 
@@ -26,22 +38,65 @@ ul {
 }
 
 ul > * {
-  width: 40%;
+  width: 45%;
   list-style: none;
   padding: 0.5em;
   margin: 0em 0em 0.5em 0em;
   border-radius: 0.5em;
   color: white;
-  background-color: rgb(41, 1, 114);
+  background-color: var(--dark-purple)
 }
 
 ul > li:hover {
   cursor: pointer;
-  background-color: rgb(77, 0, 219);
+  background-color: var(--light-purple)
 }
 
 #displayMessage {
   font-style: italic;
   font-size: 1.25rem;
-  color: rgb(92, 92, 92);
+  color: var(--display-text)
+}
+
+
+.scoreContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  margin: 10em;
+  margin-top: 2em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1em;
+  background: #efefef;
+}
+
+ol {
+  padding-left: 0;
+}
+
+ol > * {
+  padding: 0.5em;
+  margin: 0em 0em 0.5em 0em;
+  background-color: var(--highlight)
+}
+
+.buttonStyles {
+  background-color: rgb(77, 0, 219);
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  padding: 0.75em 1.25em;
+  margin: 0.5em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.buttonStyles:hover {
+  cursor: pointer;
+  background-color: rgb(77, 0, 219);
 }
