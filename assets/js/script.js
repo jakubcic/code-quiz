@@ -121,7 +121,7 @@ function checkAnswer(event){
   questionIndex++;
 
   // if we reach the end of the questions (compare question index
-  // to the length of the questions array minus 1) then compelte the quiz
+  // to the length of the questions array) then compelte the quiz
   if (questionIndex == questions.length){
     displayMessageEl.textContent = "You answered " + correctAnswersCount + "/" + questions.length + " questions correctly.";
     quizComplete();
