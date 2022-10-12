@@ -124,9 +124,79 @@ function checkAnswer(event){
   // to the length of the questions array minus 1) then compelte the quiz
   if (questionIndex == questions.length){
     displayMessageEl.textContent = "You answered " + correctAnswersCount + "/" + questions.length + " questions correctly.";
+    quizComplete();
   } else {
     displayQuestion(questionIndex);
   }
   questionSectionEl.appendChild(displayMessageEl)
 }
+
+function quizComplete(){
+  questionSectionEl.innerHTML = "";
+
+  var scoreHeading = document.createElement("h1");
+  scoreHeading.setAttribute("id", "scoreHeading");
+  scoreHeading.textContent = "All done!"
+  questionSectionEl.appendChild(scoreHeading);
+
+  var createP = document.createElement("p");
+  createP.setAttribute("id", "createP");
+  questionSectionEl.appendChild(createP);
+
+  if (timeLeft >= 0) {
+    clearInterval(timeInterval);
+    createP.textContent = "Your final score is: " + timeLeft;
+  }
+
+  var inputLabel = document.createElement("label");
+  inputLabel.setAttribute("for", "initials");
+  inputLabel.textContent = "Enter your initials: ";
+
+  questionSectionEl.appendChild(inputLabel);
+
+  var initialsInput = document.createElement("input");
+  initialsInput.setAttribute("type", "text");
+  initialsInput.setAttribute("id", "initials");
+  initialsInput.textContent = "";
+
+  questionSectionEl.appendChild(initialsInput);
+
+  var submission = document.createElement("button");
+  submission.setAttribute("type", "submit");
+  submission.setAttribute("id", "submit");
+  submission.textContent = "Submit";
+  questionSectionEl.appendChild(submission);
+
+  // event listener for initial input/submission
+  submission.addEventListener("click", function(){
+  
+    var initials = initialsInput.value;
+
+    // object to store user initials and score
+    var userScore = {
+      initials: initials,
+      score: timeLeft
+    }
+    // create array of scores to store in localStorage
+    var scoreList = localStorage.getItem("scoreList");
+    if (scoreList === null) {
+      scoreList = [];
+    } else {
+      // if scoreList already exists, grab the scoreList
+      scoreList = JSON.parse(scoreList);
+      console.log(scoreList);
+    }
+    // add newest score to scoreList array
+    scoreList.push(userScore);
+    console.log(scoreList);
+    // 
+    var newScore = JSON.stringify(scoreList);
+    localStorage.setItem("scoreList", newScore);
+    // load the scoreboard
+    window.location.href = "scoreboard.html"
+
+    }
+  );
+}
+
 
