@@ -5,6 +5,7 @@ var scoreListDisplay = document.querySelector("#scoreListDisplay");
 // event listener for Clear Scores button
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
+  location.reload();
 });
 
 // retreive scoreList array from localStorage
@@ -20,7 +21,7 @@ if (scoreList !== null) {
 
   for (let i = 0; i < sortedScoreList.length; i++) {
     var scoreListItem = document.createElement("li");
-    scoreListItem.textContent = sortedScoreList[i].initials + " " + sortedScoreList[i].score;
+    scoreListItem.textContent = sortedScoreList[i].initials + " - " + sortedScoreList[i].score;
     scoreListDisplay.appendChild(scoreListItem);
   }
 }
