@@ -13,10 +13,14 @@ scoreList = JSON.parse(scoreList);
 
 if (scoreList !== null) {
   console.log(scoreList);
+  // sort by highest score
+  var sortedScoreList = scoreList.sort(
+    (a, b) => Number(b.score) - Number(a.score));
+  console.log("descending", scoreList);
 
-  for (let i = 0; i < scoreList.length; i++) {
+  for (let i = 0; i < sortedScoreList.length; i++) {
     var scoreListItem = document.createElement("li");
-    scoreListItem.textContent = scoreList[i].initials + " " + scoreList[i].score;
+    scoreListItem.textContent = sortedScoreList[i].initials + " " + sortedScoreList[i].score;
     scoreListDisplay.appendChild(scoreListItem);
   }
 }
