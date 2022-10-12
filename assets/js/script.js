@@ -67,12 +67,13 @@ function displayQuestion(questionIndex){
   questionSectionEl.innerHTML = "";
   questionListEl.innerHTML = "";
   startBtnEl.style.visibility = "hidden";
-
+var questionHeading = document.createElement("h1");
   // loop through each question
   for (let i = 0; i < questions.length; i++) {
     var currentQuestion = questions[questionIndex].question;
     var currentOptions = questions[questionIndex].options;
-    questionSectionEl.textContent = currentQuestion;
+    questionHeading.textContent = currentQuestion;
+    questionSectionEl.appendChild(questionHeading);
   }
 
   // loop through each option for the currentQuestion
